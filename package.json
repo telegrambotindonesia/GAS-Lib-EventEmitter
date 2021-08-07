@@ -1,0 +1,23 @@
+{
+  "name": "gas-lib-eventemitter",
+  "version": "1.0.0",
+  "description": "This library to create and handle custom events. The EventEmitter class can be used to create and handle custom events module.",
+  "main": "eventEmitter.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/telegrambotindonesia/GAS-Lib-EventEmitter.git"
+  },
+  "keywords": [
+    "gas",
+    "javascript"
+  ],
+  "author": "Hasanudin H Syafaat",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/telegrambotindonesia/GAS-Lib-EventEmitter/issues"
+  },
+  "homepage": "https://github.com/telegrambotindonesia/GAS-Lib-EventEmitter#readme"
+}

@@ -97,7 +97,7 @@ const event = new EventEmitter.init();
 event.on('start', () => Logger.log(1) );
 event.on('start', () => Logger.log(2) );
 
-let count = listenerCount(event.listenerCount('start'));
+let count = (event.listenerCount('start');
 Logger.log('count', count);
 
 ```
