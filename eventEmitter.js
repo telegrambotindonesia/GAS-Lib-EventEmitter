@@ -1,5 +1,6 @@
 /*
-Event Emitter for GASLibv3
+Event Emitter
+for Google Apps Script
 Simple source, simple to learn
 and simple to use :-)
 
@@ -13,8 +14,8 @@ class EventEmitter {
         this.observers = {};
     }
 
-    on(event, ...listeners) {
-        return listeners.forEach(listener => this.addListener(event, listener));
+    on(events, ...listeners) {
+        return listeners.forEach(listener => this.addListener(events, listener));
     }
 
     once(event, listener) {
@@ -25,9 +26,13 @@ class EventEmitter {
         return this.addListener(event, onceEvent);
     }
 
-    addListener(event, listener) {
-        this.observers[event] = this.observers[event] || [];
-        this.observers[event].push(listener);
+    addListener(events, listener) {
+        if (!Array.isArray(events)) events = [events];
+        events.forEach(event => {
+            this.observers[event] = this.observers[event] || [];
+            this.observers[event].push(listener);
+        });
+
         return this;
     }
 
@@ -45,18 +50,21 @@ class EventEmitter {
         this.observers[event] = this.observers[event].filter(l => l !== listener);
     }
 
-    emit(event, ...args) {
-        if (this.observers[event]) {
-            const cloned = [].concat(this.observers[event]);
-            cloned.forEach(observer => {
-                observer(...args);
-            });
-        }
+    emit(events, ...args) {
+        if (!Array.isArray(events)) events = [events];
+        events.forEach(event => {
+            if (this.observers[event]) {
+                const cloned = [].concat(this.observers[event]);
+                cloned.forEach(observer => {
+                    observer(...args);
+                });
+            }
+        });
 
         if (this.observers['*']) {
             const cloned = [].concat(this.observers['*']);
             cloned.forEach(observer => {
-                observer.apply(observer, [event, ...args]);
+                observer.apply(observer, [[...events], ...args]);
             });
         }
     }

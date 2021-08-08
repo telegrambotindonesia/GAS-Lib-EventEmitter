@@ -12,7 +12,7 @@ This library to create and handle custom events. The EventEmitter class can be u
 ## Start
 
 ```javascript
-const eventEmitter = new EventEmitter.init();
+const event = new EventEmitter.init();
 ```
 
 ## Example
@@ -53,26 +53,27 @@ event.on('start', (start, end) => {
 emit('start', 1, 100);
 ```
 
-### Extends
+### Multiple Listener
 
 ```javascript
-class myEvent extends EventEmitter.init {
-    constructor() {
-        super();
-    }
+const event = new EventEmitter.init();
 
-    /*
-    ... your code
-    */
-};
-
-const event = new myEvent();
-
-event.on('start', number => {
-  console.log(`started ${number}`)
+event.on(['start' , 'lets go'], (start, end) => {
+  console.log(`started from ${start} to ${end}`)
 })
 
-event.emit('start', 23);
+emit('lets go', 1, 100);
+```
+
+### Multiple Emit
+
+```javascript
+const event = new EventEmitter.init();
+
+event.on('one', () =>  console.log('sign one'));
+event.on('two', () =>  console.log('sign one'));
+
+emit(['one', 'two'], 'args from multiple emit');
 ```
 
 ### Remove Listener
@@ -87,6 +88,39 @@ const callback = () => {
 event.on('connection', callback);
 // remove it
 event.off('connection', callback);
+```
+
+### Extends
+
+```javascript
+class myEvent extends EventEmitter.init {
+  constructor() {
+    super();
+  }
+
+  /*
+  ... your code
+  */
+};
+
+const event = new myEvent();
+
+event.on('start', number => {
+  console.log(`started ${number}`)
+})
+
+event.emit('start', 23);
+```
+
+### Listen All Event
+
+```javascript
+const event = new EventEmitter.init();
+
+event.on('*', (...args) => {
+  Logger.log('All Events') ;
+  Logger.log(JSON.stringify(args));
+});
 ```
 
 ### Count
