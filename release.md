@@ -1,6 +1,6 @@
 ## Release
 
-### v.2
+### v.2 v.3
 
 `8 August 2021`
 
